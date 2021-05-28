@@ -1,4 +1,4 @@
-package com.poc.ads.native_ad;
+package com.datdb.ads.native_ad;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,18 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.datdb.ads.R;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.VideoOptions;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdOptions;
 import com.google.android.gms.ads.nativead.NativeAdView;
-import com.poc.ads.R;
 
 public class SmallNativeAdView extends ConstraintLayout {
 
@@ -47,7 +46,7 @@ public class SmallNativeAdView extends ConstraintLayout {
 
     private void init() {
         setVisibility(GONE);
-        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.native_ad_setting, this, true);
+        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.native_ad_small, this, true);
 
         nativeAdView = rootView.findViewById(R.id.nativeAdView);
         imgIcon = rootView.findViewById(R.id.imgIcon);

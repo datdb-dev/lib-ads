@@ -1,11 +1,10 @@
-package com.poc.ads.native_ad;
+package com.datdb.ads.native_ad;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -13,18 +12,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.ads.AdListener;
+import com.datdb.ads.R;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.VideoOptions;
+import com.google.android.gms.ads.nativead.NativeAdView;
+
 import com.google.android.gms.ads.nativead.MediaView;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdOptions;
-import com.google.android.gms.ads.nativead.NativeAdView;
-import com.poc.ads.R;
 
 public class BigNativeAdView extends RelativeLayout {
 
@@ -51,7 +47,7 @@ public class BigNativeAdView extends RelativeLayout {
 
     private void init() {
         setVisibility(GONE);
-        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.native_ad_theme, this, true);
+        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.native_ad_big, this, true);
 
         nativeAdView = rootView.findViewById(R.id.nativeAdView);
         imgIcon = rootView.findViewById(R.id.imgIcon);

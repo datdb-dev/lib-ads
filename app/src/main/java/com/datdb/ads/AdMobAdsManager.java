@@ -25,7 +25,7 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
 @SuppressLint("StaticFieldLeak")
 public class AdMobAdsManager {
-    private static com.poc.ads.AdMobAdsManager instance;
+    private static AdMobAdsManager instance;
     private static Context context;
     private boolean notShowAd = false;
     private boolean isLoadingInterstitialAd;
@@ -41,14 +41,14 @@ public class AdMobAdsManager {
 
     public static void init(Context ctx) {
         if (instance == null) {
-            instance = new com.poc.ads.AdMobAdsManager();
+            instance = new AdMobAdsManager();
             context = ctx;
         }
 
         MobileAds.initialize(context);
     }
 
-    public static com.poc.ads.AdMobAdsManager getInstance() {
+    public static AdMobAdsManager getInstance() {
         return instance;
     }
 
@@ -150,7 +150,7 @@ public class AdMobAdsManager {
         return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adWidth);
     }
 
-    public void showRewardAd(Activity activity, com.poc.ads.OnRewardAdListener onRewardAdListener) {
+    public void showRewardAd(Activity activity, OnRewardAdListener onRewardAdListener) {
         if (onRewardAdListener != null) {
             onRewardAdListener.onAdLoading();
         }
@@ -177,7 +177,7 @@ public class AdMobAdsManager {
         });
     }
 
-    private void showRewardAd(Activity activity, RewardedAd rewardedAd, com.poc.ads.OnRewardAdListener onRewardAdListener) {
+    private void showRewardAd(Activity activity, RewardedAd rewardedAd, OnRewardAdListener onRewardAdListener) {
         rewardedAd.show(activity, new OnUserEarnedRewardListener() {
             @Override
             public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
