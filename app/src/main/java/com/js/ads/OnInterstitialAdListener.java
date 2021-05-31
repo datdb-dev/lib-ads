@@ -1,4 +1,4 @@
-package com.datdb.ads;
+package com.js.ads;
 
 public interface OnInterstitialAdListener {
     void onAdClose();

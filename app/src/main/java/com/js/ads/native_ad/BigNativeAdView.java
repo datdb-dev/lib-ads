@@ -1,4 +1,4 @@
-package com.datdb.ads.native_ad;
+package com.js.ads.native_ad;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,49 +9,52 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import com.datdb.ads.R;
+import com.js.ads.R;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.VideoOptions;
-import com.google.android.gms.ads.nativead.NativeAd;
-import com.google.android.gms.ads.nativead.NativeAdOptions;
 import com.google.android.gms.ads.nativead.NativeAdView;
 
-public class SmallNativeAdView extends ConstraintLayout {
+import com.google.android.gms.ads.nativead.MediaView;
+import com.google.android.gms.ads.nativead.NativeAd;
+import com.google.android.gms.ads.nativead.NativeAdOptions;
+
+public class BigNativeAdView extends RelativeLayout {
 
     private NativeAdView nativeAdView;
     private ImageView imgIcon;
-    private TextView tvAppName, tvDes;
+    private TextView tvAppName, tvDes, tvAuthor;
+    private MediaView mediaView;
     private Button btnAction;
 
-
-    public SmallNativeAdView(Context context) {
+    public BigNativeAdView(Context context) {
         super(context);
         init();
     }
 
-    public SmallNativeAdView(Context context, AttributeSet attrs) {
+    public BigNativeAdView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public SmallNativeAdView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BigNativeAdView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     private void init() {
         setVisibility(GONE);
-        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.native_ad_small, this, true);
+        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.native_ad_big, this, true);
 
         nativeAdView = rootView.findViewById(R.id.nativeAdView);
         imgIcon = rootView.findViewById(R.id.imgIcon);
         tvAppName = rootView.findViewById(R.id.tvAppName);
         tvDes = rootView.findViewById(R.id.tvDescription);
+        tvAuthor = rootView.findViewById(R.id.tvAuthor);
+        mediaView = rootView.findViewById(R.id.mediaView);
         btnAction = rootView.findViewById(R.id.btnAction);
         int color = Color.parseColor("#2196F3");
         btnAction.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC));
@@ -69,10 +72,19 @@ public class SmallNativeAdView extends ConstraintLayout {
     }
 
     private void populateNativeAd(NativeAd nativeAd) {
+        nativeAdView.setMediaView(mediaView);
         nativeAdView.setHeadlineView(tvAppName);
         nativeAdView.setBodyView(tvDes);
         nativeAdView.setCallToActionView(btnAction);
         nativeAdView.setIconView(imgIcon);
+        nativeAdView.setStoreView(tvAuthor);
+
+        if (nativeAd.getMediaContent() != null) {
+            nativeAdView.getMediaView().setMediaContent(nativeAd.getMediaContent());
+            nativeAdView.getMediaView().setVisibility(VISIBLE);
+        } else {
+            nativeAdView.getMediaView().setVisibility(GONE);
+        }
 
         if (nativeAd.getHeadline() != null) {
             ((TextView) nativeAdView.getHeadlineView()).setText(nativeAd.getHeadline());
@@ -86,6 +98,13 @@ public class SmallNativeAdView extends ConstraintLayout {
             nativeAdView.getBodyView().setVisibility(View.VISIBLE);
         } else {
             nativeAdView.getBodyView().setVisibility(View.GONE);
+        }
+
+        if (nativeAd.getStore() != null) {
+            ((TextView) nativeAdView.getStoreView()).setText(nativeAd.getStore());
+            nativeAdView.getStoreView().setVisibility(View.VISIBLE);
+        } else {
+            nativeAdView.getStoreView().setVisibility(View.GONE);
         }
 
         if (nativeAd.getCallToAction() != null) {

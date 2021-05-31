@@ -1,4 +1,4 @@
-package com.datdb.ads;
+package com.js.ads;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

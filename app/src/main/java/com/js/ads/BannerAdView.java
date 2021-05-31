@@ -1,4 +1,4 @@
-package com.datdb.ads;
+package com.js.ads;
 
 import android.content.Context;
 import android.util.AttributeSet;
